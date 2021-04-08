@@ -378,13 +378,13 @@ class PreprocessorEngine:
 
     def dump_clf(self, suffix=''):
         top_dir = self.path_to_src + '/RelaxedIK/Config/collision_nn_rust'
-        f1 = open(top_dir + '/' + self.y['collision_nn_file'] + suffix, 'w')
+        f1 = open(top_dir + '/' + self.y['collision_nn_file'] + suffix, 'wb')
         joblib.dump(self.clf, f1)
 
     def load_clf(self, suffix=''):
         top_dir = self.path_to_src + '/RelaxedIK/Config/collision_nn_rust'
         try:
-            f1 = open(top_dir + '/' + self.y['collision_nn_file'] + suffix, 'r')
+            f1 = open(top_dir + '/' + self.y['collision_nn_file'] + suffix, 'rb')
             self.clf = joblib.load(f1)
             return True
         except:
