@@ -104,7 +104,7 @@ if __name__ == '__main__':
     robot_name = y['urdf_file_name'].split('.')[0]
 
     top_dir = path_to_src + '/RelaxedIK/Config/collision_inputs_and_outputs'
-    dirs = os.walk(top_dir).next()
+    dirs = os.walk(top_dir).__next__()
 
     dir_found = False
     for d in dirs[1]:
@@ -128,7 +128,7 @@ if __name__ == '__main__':
     total_example_count = 0
 
     while total_example_count < total_number_of_examples:
-        out_file = open(top_dir + '/{}.pkl'.format(file_idx), 'w')
+        out_file = open(top_dir + '/{}.pkl'.format(file_idx), 'wb')
         states = []
         jt_pts = []
         collision_scores = []

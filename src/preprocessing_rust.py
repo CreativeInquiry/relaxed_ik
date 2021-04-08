@@ -13,7 +13,7 @@ AND FOLLOW THE STEP-BY-STEP INSTRUCTIONS THERE.  Thanks!
 
 import rospy
 import os
-from RelaxedIK.Utils.colors import bcolors
+from RelaxedIK.Utils.colors.colors import bcolors
 from RelaxedIK.relaxedIK import get_relaxedIK_from_info_file, get_relaxedIK_yaml_obj
 import numpy.random as r
 import numpy as np
@@ -27,7 +27,7 @@ from RelaxedIK.Utils.file_utils import *
 import yaml
 import pickle
 from sklearn.neural_network import MLPClassifier, MLPRegressor
-from sklearn.externals import joblib
+import joblib
 
 def relu(x):
     return max(0.0, x)
@@ -167,7 +167,7 @@ class PreprocessorEngine:
                 try_idx += 1
             chosen_idxs.append(file_idx)
 
-            pk = pickle.load(open(dir + '/{}.pkl'.format(file_idx)))
+            pk = pickle.load(open(dir + '/{}.pkl'.format(file_idx), 'rb'))
             for i in range(len(pk[0])):
                 self.states.append(pk[0][i])
                 self.jt_pts.append(pk[1][i])
@@ -188,11 +188,11 @@ class PreprocessorEngine:
             else:
                 self.in_singularity.append(1.)
 
-        print(bcolors.OKGREEN + 'samples all loaded.' + bcolors.ENDC
+        print(bcolors.OKGREEN + 'samples all loaded.' + bcolors.ENDC)
 
     def generate_input_and_output_pairs(self, num_samples=40000):
         for i in range(num_samples):
-            print('sample {} of {}'.format(i, num_samples)
+            print('sample {} of {}'.format(i, num_samples))
             rv, jt_pt_vec, collision_score = get_input_output_pair(self.relaxedIK)
             self.states.append(rv)
             self.jt_pts.append(jt_pt_vec)
@@ -217,7 +217,7 @@ class PreprocessorEngine:
 
         self.clf = clf
         t1 = self.find_optimal_split_point(2000)
-        print(t1
+        print(t1)
         self.dump_yaml(t1[0])
         self.dump_clf()
 
@@ -238,7 +238,7 @@ class PreprocessorEngine:
 
         self.clf = clf
         t1 = self.find_optimal_split_point_jointpoint(2000)
-        print(t1
+        print(t1)
         self.dump_yaml(split_point=t1[0], suffix='_jointpoint')
         self.dump_clf(suffix='_jointpoint')
 
@@ -258,7 +258,7 @@ class PreprocessorEngine:
 
         self.clf = clf
         # t1 = self.find_optimal_split_point(2000)
-        # print(t1
+        # print(t1)
         # self.dump_yaml(t1[0])
         # self.dump_clf()
 
