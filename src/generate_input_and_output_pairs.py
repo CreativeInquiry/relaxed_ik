@@ -13,7 +13,7 @@ AND FOLLOW THE STEP-BY-STEP INSTRUCTIONS THERE.  Thanks!
 
 import rospy
 import os
-from RelaxedIK.Utils.colors import bcolors
+from RelaxedIK.Utils.colors.colors import bcolors
 from RelaxedIK.relaxedIK import get_relaxedIK_from_info_file, get_relaxedIK_yaml_obj
 import numpy.random as r
 import numpy as np
