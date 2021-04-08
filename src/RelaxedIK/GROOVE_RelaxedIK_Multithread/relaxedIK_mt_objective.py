@@ -7,7 +7,7 @@ def objective_master_relaxedIK_mt(x, vars):
     good_input = True
     for i in x:
        if math.isnan(i):
-            # print 'yes'
+            # print('yes')
             # x = vars.x_prev + np.random.uniform(-0.0001, 0.0001, len(x))
             good_input = False
             break

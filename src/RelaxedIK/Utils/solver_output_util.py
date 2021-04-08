@@ -15,9 +15,9 @@ class SolverOutputUtil:
         if not overwrite:
             highest_matching_number = 0
             for f in onlyfiles:
-                print f
+                print(f)
                 str_arr = f.split('_')
-                print len(str_arr)
+                print(len(str_arr))
                 if task == str_arr[0] and not len(str_arr) == 1:
                     suffix_num = int(str_arr[1])
                     if suffix_num > highest_matching_number:

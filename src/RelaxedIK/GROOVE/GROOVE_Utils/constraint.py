@@ -23,7 +23,7 @@ class Constraint:
         numDOF = len(x)
         g = O.approx_fprime(x, self.func, numDOF * [0.001])
         if grad.size > 0:
-            for i in xrange(numDOF):
+            for i in range(numDOF):
                 grad[i] = -g[i]
         return -self.func(x)
 

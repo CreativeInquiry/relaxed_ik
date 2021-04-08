@@ -25,7 +25,7 @@ class Joint_Velocity_Constraint(Constraint):
         # vars = get_groove_global_vars()
         avg = vars.avg_solution_time
         avg = 0.02
-        # print avg
+        # print(avg)
         diff = abs(x[self.joint_idx] - vars.xopt[self.joint_idx])
         vel_limit = vars.robot.velocity_limits[self.joint_idx] * self.velocity_scale
         vel_limit_per_update = vel_limit * avg

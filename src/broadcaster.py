@@ -197,7 +197,7 @@ def joint_state_publish(xopt, robot, solver='relaxed_ik'):
         js.position[22] = x[5]
         js.position[24] = x[6]
         js.position = tuple(js.position)
-        # print js.position
+        # print(js.position)
     elif robot == 'hubo_upper_body':
         js.name = ['LEFT_SHOULDER_PITCH', 'LEFT_SHOULDER_ROLL', 'LEFT_SHOULDER_YAW', 'LEFT_ELBOW', 'LEFT_WRIST_YAW', # five per row
                    'LEFT_WRIST_PITCH', 'LWFT', 'LEFT_WRIST_YAW_2', 'LHAND_a1', 'LHAND_a2',

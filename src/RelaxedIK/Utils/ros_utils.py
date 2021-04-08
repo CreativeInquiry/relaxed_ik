@@ -109,7 +109,7 @@ def draw_linestrip_in_rviz(publisher, frame_id, points, color, width = 0.03, id=
 
     marker.scale.x = width
 
-    for i in xrange(len(points)):
+    for i in range(len(points)):
         p = Point()
         p.x = points[i][0]
         p.y = points[i][1]
@@ -136,7 +136,7 @@ def draw_linelist_in_rviz(publisher, frame_id, points, color, width = 0.03, id=3
 
     marker.scale.x = width
 
-    for i in xrange(len(points)):
+    for i in range(len(points)):
         p = Point()
         p.x = points[i][0]
         p.y = points[i][1]

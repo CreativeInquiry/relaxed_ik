@@ -1,5 +1,5 @@
-from GROOVE.groove import get_groove
-import Utils.transformations as T
+from RelaxedIK.GROOVE.groove import get_groove
+from RelaxedIK.Utils.transformations import transformations as T
 import math as M
 import numpy as np
 import numpy.random as r

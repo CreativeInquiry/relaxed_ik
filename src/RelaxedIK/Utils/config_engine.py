@@ -1,9 +1,9 @@
 import numpy as np
-from colors import bcolors
+from ..Utils.colors.colors import bcolors
 from os import listdir
-from sklearn.externals import joblib
+import joblib
 from os.path import isfile, join
-from neural_net_trainer import Collision_NN_Trainer
+from ..Utils.neural_net_trainer.neural_net_trainer import Collision_NN_Trainer
 import os
 
 
@@ -60,7 +60,7 @@ class Config_Engine:
         # file_vars = [robot_name, collision_nn, self.vars.init_state, self.vars.full_joint_lists, self.vars.fixed_ee_joints, \
         #        self.vars.joint_order, self.vars.urdf_path, self.vars.collision_file]
 
-        print self.nn_file_name
+        print(self.nn_file_name)
         joblib.dump(collision_nn, self.path + self.nn_file_name)
 
         return robot_name, collision_nn, self.vars.init_state, self.vars.full_joint_lists, self.vars.fixed_ee_joints, \
@@ -68,4 +68,4 @@ class Config_Engine:
 
 if __name__ == '__main__':
     ce = Config_Engine()
-    print ce.check_for_config_file()
+    print(ce.check_for_config_file())

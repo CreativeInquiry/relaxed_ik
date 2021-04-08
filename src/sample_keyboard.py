@@ -57,7 +57,7 @@ if __name__ == '__main__':
         joint_state_define_file = open(path_to_src + '/RelaxedIK/Config/joint_state_define_functions/' + joint_state_define_file_name, 'r')
         func = joint_state_define_file.read()
         exec(func)
-        print urdf_file_name
+        print(urdf_file_name)
 
     num_chains = len(ee_fixed_joints)
 
@@ -95,14 +95,14 @@ if __name__ == '__main__':
         num_ee = num_chains
         num_poses = len(pose_goals)
         # if not num_poses == num_chains:
-        #     print bcolors.FAIL + 'ERROR: Number of pose goals ({}) ' \
+        #     print(bcolors.FAIL + 'ERROR: Number of pose goals ({}) ' \
         #                          'not equal to the number of kinematic chains ({}).  Exiting relaxed_ik_node'.format(num_poses, num_chains)
         #     rospy.signal_shutdown()
 
         pos_goals = []
         quat_goals = []
 
-        for i in xrange(num_ee):
+        for i in range(num_ee):
             p = pose_goals[i]
             pos_x = p.position.x
             pos_y = p.position.y

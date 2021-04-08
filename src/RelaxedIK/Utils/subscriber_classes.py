@@ -34,7 +34,7 @@ class sub_eeposegoals:
 
         pose_goals = data.ee_poses
 
-        for i in xrange(len(pose_goals)):
+        for i in range(len(pose_goals)):
             p = pose_goals[i]
             pos_x = p.position.x
             pos_y = p.position.y

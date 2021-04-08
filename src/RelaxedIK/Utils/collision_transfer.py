@@ -11,10 +11,10 @@ import numpy.random as r
 class CollisionVars:
     def __init__(self, path_to_src):
         # rospy.init_node('coll_test')
-        # print "got here!"
+        # print("got here!"
         # path_to_src = os.path.dirname(__file__)
-        # print path_to_src
-        # print path_to_src + '/RelaxedIK/Config/loaded_robot'
+        # print(path_to_src
+        # print(path_to_src + '/RelaxedIK/Config/loaded_robot'
         loaded_robot_file = open(path_to_src + '/RelaxedIK/Config/loaded_robot', 'r')
         loaded_robot = loaded_robot_file.readline()
         y = yaml.load(open(path_to_src + '/RelaxedIK/Config/info_files/' + loaded_robot))

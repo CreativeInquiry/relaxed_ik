@@ -68,7 +68,7 @@ if __name__ == '__main__':
                     for i,n in enumerate(names):
                         if o == n:
                             positions.append(js[i])
-                print str(positions) + ','
+                print(str(positions) + ','))
                 prev_state = js
 
     rate.sleep()

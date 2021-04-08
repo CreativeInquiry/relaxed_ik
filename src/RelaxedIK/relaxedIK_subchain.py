@@ -28,9 +28,9 @@ class RelaxedIK_subchain(object):
         #     xopt = self.groove.solve()
         #     self.mt_manager.subchains_write[self.subchain_idx] = xopt
         #     self.solution_count += 1
-        #     # print 'thread {} solved: {}'.format(self.subchain_idx, xopt)
+        #     # print('thread {} solved: {}'.format(self.subchain_idx, xopt)
 
-        # print 'subchain {}, solution {}'.format(self.subchain_idx, self.mt_manager.solution_count)
+        # print('subchain {}, solution {}'.format(self.subchain_idx, self.mt_manager.solution_count)
         while not rospy.is_shutdown():
             curr_target_idx = self.mt_manager.solution_count
             if not self.solution_count == curr_target_idx:
@@ -39,14 +39,14 @@ class RelaxedIK_subchain(object):
                 xopt = self.groove.solve()
                 self.mt_manager.subchains_write[self.subchain_idx] = xopt
                 self.solution_count += 1
-                print 'thread {} solved: {}'.format(self.subchain_idx, self.solution_count)
+                print('thread {} solved: {}'.format(self.subchain_idx, self.solution_count))
 
 
         # while not rospy.is_shutdown():
         # self.ja = JointAngles()
         # self.ja.header.frame_id = str(self.vars.subchain_idx)
         # xopt = self.groove.solve()
-        # print 'subchain idx: {}, xopt: {}'.format(self.subchain_idx, xopt)
+        # print('subchain idx: {}, xopt: {}'.format(self.subchain_idx, xopt)
         # self.mt_manager.subchains_write[self.subchain_idx] = xopt
         # self.ja.angles = []
         # for x in xopt:

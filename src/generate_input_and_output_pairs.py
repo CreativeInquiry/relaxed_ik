@@ -57,7 +57,7 @@ def get_collision_score(relaxedIK, state):
 
 def list_of_values_to_string(list):
     out_str = '[ '
-    for i in xrange(len(list) - 1):
+    for i in range(len(list) - 1):
         out_str += str(list[i])
         out_str += ', '
     out_str += str(list[-1])
@@ -69,7 +69,7 @@ def list_of_list_of_values_to_string(list):
     if type(list[0]) == float or type(list[0]) == np.float64:
         return list_of_values_to_string(list)
     else:
-        for i in xrange(len(list) - 1):
+        for i in range(len(list) - 1):
             out_str += list_of_list_of_values_to_string(list[i]) + ', '
         out_str += list_of_list_of_values_to_string(list[-1])
 
@@ -134,8 +134,8 @@ if __name__ == '__main__':
         collision_scores = []
         condition_scores = []
         yoshiwaka_scores = []
-        for j in xrange(lines_per_file):
-            print 'file {}, line {}'.format(file_idx, j)
+        for j in range(lines_per_file):
+            print('file {}, line {}'.format(file_idx, j))
             tup = get_input_output_pair(relaxedIK)
             states.append(tup[0])
             jt_pts.append(tup[1])

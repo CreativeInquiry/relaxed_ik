@@ -16,8 +16,8 @@ def get_subchains_from_indices(indices, x):
 def glue_subchains(indices, subchains, numDOF):
     x = numDOF*[0.0]
 
-    for i in xrange(len(subchains)):
-        for j in xrange(len(subchains[i])):
+    for i in range(len(subchains)):
+        for j in range(len(subchains[i])):
             x[indices[i][j]] = subchains[i][j]
 
     return x
@@ -39,5 +39,5 @@ if __name__ == '__main__':
     indices = [[0,2], [1,3,4], [8,6,7,5]]
     subchains = [[0.0, 1.0], [2.0, 3.0, 4.0], [5., 6., 7., 8.]]
 
-    print inject_state(x, [100.,100., 100., 100.], [0,1,4,5])
-    print x
+    print(inject_state(x, [100.,100., 100., 100.], [0,1,4,5]))
+    print(x)

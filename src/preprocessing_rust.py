@@ -40,7 +40,7 @@ def relu_prime(x):
 
 def relu_jacobian(x):
     m = np.zeros((len(x), len(x)))
-    for i in xrange(len(x)):
+    for i in range(len(x)):
         m[i,i] = relu_prime(x[i])
     return m
 
@@ -109,7 +109,7 @@ def get_random_normal(mean, sigma, dim):
 def unspin(state, relaxedIK):
     bounds = relaxedIK.vars.bounds
     new_state = copy.deepcopy(state)
-    for i in xrange(len(state)):
+    for i in range(len(state)):
         while new_state[i] < bounds[i][0]:
             new_state[i] += 2.0 * math.pi
         while new_state[i] > bounds[i][1]:
@@ -159,7 +159,7 @@ class PreprocessorEngine:
 
         sample_idx = 0
         while sample_idx < num_samples:
-            print 'sample {} of {}'.format(sample_idx, num_samples)
+            print('sample {} of {}'.format(sample_idx, num_samples))
             file_idx = np.random.randint(0, highest_number)
             try_idx = 0
             while file_idx in chosen_idxs and try_idx < 100:
@@ -168,7 +168,7 @@ class PreprocessorEngine:
             chosen_idxs.append(file_idx)
 
             pk = pickle.load(open(dir + '/{}.pkl'.format(file_idx)))
-            for i in xrange(len(pk[0])):
+            for i in range(len(pk[0])):
                 self.states.append(pk[0][i])
                 self.jt_pts.append(pk[1][i])
                 self.collision_scores.append(pk[2][i])
@@ -181,18 +181,18 @@ class PreprocessorEngine:
                 sample_idx += 1
 
         split_point = get_split_point(self.yoshikawa_scores)
-        for i in xrange(len(self.yoshikawa_scores)):
+        for i in range(len(self.yoshikawa_scores)):
             self.singularity_scores.append(interpolate_singularity_score(self.yoshikawa_scores[i], split_point))
             if self.yoshikawa_scores[i] < split_point:
                 self.in_singularity.append(-1.)
             else:
                 self.in_singularity.append(1.)
 
-        print bcolors.OKGREEN + 'samples all loaded.' + bcolors.ENDC
+        print(bcolors.OKGREEN + 'samples all loaded.' + bcolors.ENDC
 
     def generate_input_and_output_pairs(self, num_samples=40000):
-        for i in xrange(num_samples):
-            print 'sample {} of {}'.format(i, num_samples)
+        for i in range(num_samples):
+            print('sample {} of {}'.format(i, num_samples)
             rv, jt_pt_vec, collision_score = get_input_output_pair(self.relaxedIK)
             self.states.append(rv)
             self.jt_pts.append(jt_pt_vec)
@@ -206,7 +206,7 @@ class PreprocessorEngine:
         if init_load:
             self.load_input_and_output_pairs(input_samples)
         hls = []
-        for i in xrange(num_layers):
+        for i in range(num_layers):
             hls.append(layer_width)
         hls = tuple(hls)
         clf = MLPRegressor(solver='adam', alpha=1,
@@ -217,7 +217,7 @@ class PreprocessorEngine:
 
         self.clf = clf
         t1 = self.find_optimal_split_point(2000)
-        print t1
+        print(t1
         self.dump_yaml(t1[0])
         self.dump_clf()
 
@@ -227,7 +227,7 @@ class PreprocessorEngine:
         if init_load:
             self.load_input_and_output_pairs(input_samples)
         hls = []
-        for i in xrange(num_layers):
+        for i in range(num_layers):
             hls.append(layer_width)
         hls = tuple(hls)
         clf = MLPRegressor(solver='adam', alpha=1,
@@ -238,7 +238,7 @@ class PreprocessorEngine:
 
         self.clf = clf
         t1 = self.find_optimal_split_point_jointpoint(2000)
-        print t1
+        print(t1
         self.dump_yaml(split_point=t1[0], suffix='_jointpoint')
         self.dump_clf(suffix='_jointpoint')
 
@@ -247,7 +247,7 @@ class PreprocessorEngine:
     def train_singularity_nn(self, layer_width = 10, num_layers = 5, input_samples=200000):
         self.load_input_and_output_pairs(input_samples)
         hls = []
-        for i in xrange(num_layers):
+        for i in range(num_layers):
             hls.append(layer_width)
         hls = tuple(hls)
         clf = MLPRegressor(solver='adam', alpha=1,
@@ -258,7 +258,7 @@ class PreprocessorEngine:
 
         self.clf = clf
         # t1 = self.find_optimal_split_point(2000)
-        # print t1
+        # print(t1
         # self.dump_yaml(t1[0])
         # self.dump_clf()
 
@@ -274,7 +274,7 @@ class PreprocessorEngine:
         false_positive_magnitudes = []
         false_negative_magnitudes = []
 
-        for i in xrange(num_samples):
+        for i in range(num_samples):
             rvec = rand_vec(self.relaxedIK)
             pred = self.clf.predict([rvec])
             ground_truth = get_collision_score(self.relaxedIK, rvec)
@@ -301,7 +301,7 @@ class PreprocessorEngine:
     def find_optimal_split_point(self, num_samples=1000):
         predictions = []
         ground_truths = []
-        for i in xrange(num_samples):
+        for i in range(num_samples):
             rvec = rand_vec(self.relaxedIK)
             pred = self.clf.predict([rvec])
             ground_truth = get_collision_score(self.relaxedIK, rvec)
@@ -318,7 +318,7 @@ class PreprocessorEngine:
             false_positive_count = 0.
             false_negative_count = 0.
             total_count = 0.
-            for i in xrange(num_samples):
+            for i in range(num_samples):
                 if predictions[i] >= split_point and ground_truths[i] < 5.0:
                     false_negative_count += 1.0
                 elif predictions[i] < split_point and ground_truths[i] >= 5.0:
@@ -339,7 +339,7 @@ class PreprocessorEngine:
     def find_optimal_split_point_jointpoint(self, num_samples=1000):
         predictions = []
         ground_truths = []
-        for i in xrange(num_samples):
+        for i in range(num_samples):
             rvec = rand_vec(self.relaxedIK)
             frames = self.relaxedIK.vars.robot.getFrames(rvec)
             jt_pt_vec = frames_to_jt_pt_vec(frames)
@@ -358,7 +358,7 @@ class PreprocessorEngine:
             false_positive_count = 0.
             false_negative_count = 0.
             total_count = 0.
-            for i in xrange(num_samples):
+            for i in range(num_samples):
                 if predictions[i] >= split_point and ground_truths[i] < 5.0:
                     false_negative_count += 1.0
                 elif predictions[i] < split_point and ground_truths[i] >= 5.0:
@@ -413,9 +413,9 @@ class PreprocessorEngine:
 
     def manual_predict(self, x):
         xout = np.array(x)
-        for i in xrange(len(self.coefs)):
+        for i in range(len(self.coefs)):
             xout =  np.dot(xout, np.array(self.coefs[i])) + np.array(self.intercepts[i])
-            for j in xrange(len(xout)):
+            for j in range(len(xout)):
                 xout[j] = relu(xout[j])
         return xout
 
@@ -425,9 +425,9 @@ class PreprocessorEngine:
     def gradient(self, x):
         xout = np.array(x)
         grad = []
-        for i in xrange(len(self.coefs)):
+        for i in range(len(self.coefs)):
             xout =  np.dot(xout, np.array(self.coefs[i])) + np.array(self.intercepts[i])
-            for j in xrange(len(xout)):
+            for j in range(len(xout)):
                 xout[j] = relu(xout[j])
             dr = relu_jacobian(xout)
             dc = np.array(self.coefs[i]).T
@@ -441,7 +441,7 @@ class PreprocessorEngine:
     def finite_diff(self, x, h=0.00000001):
         grad = np.array(x)
         f_0 = self.manual_predict(x)
-        for i in xrange(len(grad)):
+        for i in range(len(grad)):
             x_h = copy.deepcopy(x)
             x_h[i] += h
             f_h = self.manual_predict(x_h)

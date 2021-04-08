@@ -8,11 +8,11 @@ from std_msgs.msg import Float32
 from ..Utils.urdf_load import *
 from ..GROOVE_RelaxedIK.relaxedIK_constraint import Singularity_Avoidance_Constraint, Joint_Velocity_Constraint
 from ..GROOVE_RelaxedIK.relaxedIK_objective import *
-from ..Utils.collision_graph import Collision_Graph
+from ..Utils.collision_graph.collision_graph import Collision_Graph
 from ..Utils.config_engine import Config_Engine
 # import rospy
 import os
-from sklearn.externals import joblib
+import joblib
 from RelaxedIK.Utils.yaml_utils import get_relaxedIK_yaml_obj
 import rospy
 
@@ -48,19 +48,19 @@ class RelaxedIK_vars(Vars):
         Vars.__init__(self,name, objective_function, init_state,objectives,weight_funcs,weight_priors,constraints,bounds)
         # check inputs #####################################################################################################################
         if not (rotation_mode == 'relative' or rotation_mode == 'absolute'):
-            print bcolors.FAIL + 'Invalid rotation_mode.  Must be <relative> or <absolute>.  Exiting.' + bcolors.ENDC
+            print(bcolors.FAIL + 'Invalid rotation_mode.  Must be <relative> or <absolute>.  Exiting.' + bcolors.ENDC)
             raise ValueError('Invalid rotation_mode.')
         if not (position_mode == 'relative' or position_mode == 'absolute'):
-            print bcolors.FAIL + 'Invalid position_mode.  Must be <relative> or <absolute>.  Exiting.' + bcolors.ENDC
+            print(bcolors.FAIL + 'Invalid position_mode.  Must be <relative> or <absolute>.  Exiting.' + bcolors.ENDC)
             raise ValueError('Invalid position_mode.')
         num_objs = len(objectives)
         if not (num_objs == len(weight_funcs) == len(weight_priors)):
-            print bcolors.FAIL + 'Invalid Inputs.  The number of objectives ({}) must be the same as the number' \
+            print(bcolors.FAIL + 'Invalid Inputs.  The number of objectives ({}) must be the same as the number' \
                                  'of weight functions ({}) and weight priors ({}).  Exiting.'.format(str(num_objs),
                                                                                                      str(len(
                                                                                                          weight_funcs)),
                                                                                                      str(len(
-                                                                                                         weight_priors))) + bcolors.ENDC
+                                                                                                         weight_priors))) + bcolors.ENDC)
             raise ValueError('Invalid function arguments.')
         ###################################################################################################################################
 
@@ -83,7 +83,7 @@ class RelaxedIK_vars(Vars):
 
 
         if full_arms == []:
-            for i in xrange(self.num_chains):
+            for i in range(self.num_chains):
                 urdf_robot, arm, arm_c, tree = urdf_load(urdf_path, '', '', full_joint_lists[i], fixed_ee_joints[i])
                 if self.c_boost:
                     self.arms.append(arm_c)
@@ -139,15 +139,15 @@ class RelaxedIK_vars(Vars):
         velocity_constraints = True
         velocity_scale = 1.0
         if velocity_constraints:
-            for i in xrange(self.robot.numDOF):
+            for i in range(self.robot.numDOF):
                 self.constraints += (Joint_Velocity_Constraint(i,velocity_scale),)
 
         if not self.numDOF == len(init_state):
             # self.init_state = self.numDOF * [0]
-            # print bcolors.WARNING + 'WARNING: Length of init_state does not match number of robot DOFs.  Automatically ' \
+            # print(bcolors.WARNING + 'WARNING: Length of init_state does not match number of robot DOFs.  Automatically ' \
             #                         'initializing init_state as {}.  This may cause errors.'.format(
             #    str(self.init_state)) + bcolors.ENDC
-            print bcolors.WARNING + 'WARNING: Length of init_state does not match number of robot DOFs.  Is this what you intended?' + bcolors.ENDC
+            print(bcolors.WARNING + 'WARNING: Length of init_state does not match number of robot DOFs.  Is this what you intended?' + bcolors.ENDC)
 
         Vars.__init__(self, name, objective_function, self.init_state,objectives,weight_funcs,weight_priors,constraints=self.constraints,bounds=self.bounds)
 

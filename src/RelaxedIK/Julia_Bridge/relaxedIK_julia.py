@@ -20,7 +20,7 @@ class RelaxedIK_Julia:
         num_dof = len(line_split) - 2
         x = num_dof * [0.0]
         try:
-            for i in xrange(1, num_dof+1):
+            for i in range(1, num_dof+1):
                 x[i-1] = float(line_split[i])
             self.prev_solution = x
             return x
@@ -34,7 +34,7 @@ class RelaxedIK_Julia:
         f = open(self.path_to_src + '/RelaxedIK/Config/goals', 'w')
         f.write('{}\n'.format(self.curr_send_idx))
         num_goals = len(pos_goals)
-        for i in xrange(num_goals):
+        for i in range(num_goals):
             f.write('{},{},{};{},{},{},{}\n'.format(pos_goals[i][0], pos_goals[i][1], pos_goals[i][2], quat_goals[i][0],
                                                     quat_goals[i][1], quat_goals[i][2], quat_goals[i][3]))
         f.close()
@@ -52,7 +52,7 @@ class RelaxedIK_Julia:
     def reset(self, num_chains):
         pos_goals = []
         quat_goals = []
-        for i in xrange(num_chains):
+        for i in range(num_chains):
             pos_goals.append([0.,0.,0.])
             quat_goals.append([1.,0.,0.,0.])
         self.send_goals(pos_goals, quat_goals)

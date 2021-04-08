@@ -9,7 +9,7 @@ class EMA_filter:
         self.a = a
         self.window_size = window_size
         self.filtered_signal = []
-        for i in xrange(window_size):
+        for i in range(window_size):
             self.filtered_signal.append(np.array(init_state))
 
     def filter(self, state):
@@ -19,7 +19,7 @@ class EMA_filter:
         filtered_state = np.zeros((len(state)))
 
         # sum = 0.0
-        for i in xrange(self.window_size):
+        for i in range(self.window_size):
             weights[i] = self.a*(1.0 - self.a)**(i)
             if i == 0:
                 filtered_state = weights[i]*state_arr
@@ -40,7 +40,7 @@ def bilateral_filter(array, window_size=10, r=15.0, s=15.0, c=1.0):
     array_size = len(array)
     filtered_array = []
 
-    for i in xrange(array_size):
+    for i in range(array_size):
         window = range(i-window_size/2, (i+window_size/2)+1)
 
         # numerator = np.array([0.0,0.0,0.0])
@@ -71,11 +71,11 @@ def gaussian(x, sigma, mean=0, c= 1.0):
 if __name__ == '__main__':
     # ema = EMA_filter([1,2,3])
     # for i in range(20):
-     #   print ema.filter([4,5,6])
+     #   print(ema.filter([4,5,6])
 
     array = []
-    for i in xrange(200):
+    for i in range(200):
         array.append(np.random.uniform(size=(3)))
 
-    print array[40]
-    print bilateral_filter(array)[40]
+    print(array[40])
+    print(bilateral_filter(array)[40])

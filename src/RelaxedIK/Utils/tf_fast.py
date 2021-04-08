@@ -1,6 +1,6 @@
 import math
 import numpy
-from _transformations import *
+from ..Utils.transformations import *
 
 # added by Danny Rakita
 def quaternion_log(quaternion):
@@ -67,5 +67,5 @@ def quaternion_dispQ(q,qPrime):
 if __name__ == '__main__':
     q1 = random_quaternion()
     q2 = random_quaternion()
-    print quaternion_disp(q1,q2)
+    print(quaternion_disp(q1,q2))
 

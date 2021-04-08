@@ -1,6 +1,6 @@
 import rospy
 import yaml
-from RelaxedIK.Utils.colors import bcolors
+from RelaxedIK.Utils.colors.colors import bcolors
 import numpy as np
 
 def get_relaxedIK_yaml_obj(path_to_src):
@@ -26,7 +26,7 @@ def get_relaxedIK_yaml_obj_from_info_file_name(path_to_src, info_file_name):
 
 def list_of_values_to_string(list):
     out_str = '[ '
-    for i in xrange(len(list) - 1):
+    for i in range(len(list) - 1):
         out_str += str(list[i])
         out_str += ', '
     out_str += str(list[-1])
@@ -38,7 +38,7 @@ def list_of_list_of_values_to_string(list):
     if type(list[0]) == float or type(list[0]) == np.float64:
         return list_of_values_to_string(list)
     else:
-        for i in xrange(len(list) - 1):
+        for i in range(len(list) - 1):
             out_str += list_of_list_of_values_to_string(list[i]) + ', '
         out_str += list_of_list_of_values_to_string(list[-1])
 
@@ -47,7 +47,7 @@ def list_of_list_of_values_to_string(list):
 
 def list_of_values_to_csv_string(list):
     out_str = ''
-    for i in xrange(len(list) - 1):
+    for i in range(len(list) - 1):
         out_str += str(list[i])
         out_str += ', '
     out_str += str(list[-1])
@@ -58,7 +58,7 @@ def list_of_list_of_values_to_csv_string(list):
     if type(list[0]) == float or type(list[0]) == np.float64:
         return list_of_values_to_csv_string(list)
     else:
-        for i in xrange(len(list) - 1):
+        for i in range(len(list) - 1):
             out_str += list_of_list_of_values_to_csv_string(list[i]) + ';'
         out_str += list_of_list_of_values_to_csv_string(list[-1])
 

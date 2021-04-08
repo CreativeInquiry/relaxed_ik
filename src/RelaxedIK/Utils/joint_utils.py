@@ -18,7 +18,7 @@ def interpolate_to_joint_limits(from_q, to_q, t=0.1, numDOF=6, joint_limits=None
     else:
         limits = joint_limits
 
-    for i in xrange(numDOF):
+    for i in range(numDOF):
         disp = to_q[i] - from_q[i]
         disp_norm = abs(disp)
 
@@ -45,5 +45,5 @@ def check_legal_velocity(from_q, to_q, t=0.1, numDOF=6, joint_limits=None):
 
 if __name__ == '__main__':
     q,k= interpolate_to_joint_limits([-.1,.3,0],[-.2,.3,.1],numDOF=3, joint_limits=[3.15,6.0,3.15])
-    print check_legal_velocity([-.1,.3,0],[-.1,.4,.07],numDOF=3, t=0.02,joint_limits=[3.15,6.0,3.15])
+    print(check_legal_velocity([-.1,.3,0],[-.1,.4,.07],numDOF=3, t=0.02,joint_limits=[3.15,6.0,3.15]))
 

@@ -1,6 +1,6 @@
-import objective as obj
-import constraint as con
-from colors import bcolors
+from ..GROOVE_Utils.objective import Objective as obj
+from ..GROOVE_Utils.constraint import Constraint as con
+from ..GROOVE_Utils.colors import bcolors
 
 class GrooveType:
     def __init__(self, vars):
@@ -51,7 +51,7 @@ class GrooveType_scipy(GrooveType):
         f_obj = xopt_full.fun
 
         if verbose_output:
-            print bcolors.OKBLUE + str(xopt_full) + bcolors.ENDC + '\n'
+            print(bcolors.OKBLUE + str(xopt_full) + bcolors.ENDC + '\n')
 
         self.vars.update(xopt, f_obj)
 
@@ -130,7 +130,7 @@ class GrooveType_nlopt(GrooveType):
         f_obj = self.opt.last_optimum_value()
 
         if verbose_output:
-            print bcolors.OKBLUE + str(xopt) + bcolors.ENDC + '\n'
+            print(bcolors.OKBLUE + str(xopt) + bcolors.ENDC + '\n')
 
         self.vars.update(xopt, f_obj)
 

@@ -75,7 +75,7 @@ if __name__ == '__main__':
                     for i,n in enumerate(names):
                         if o == n:
                             positions.append(js[i])
-                print str(positions) + ','
+                print(str(positions) + ',')
                 prev_state = js
 
             col_val = rik.vars.collision_graph.get_collision_score_of_state(positions)

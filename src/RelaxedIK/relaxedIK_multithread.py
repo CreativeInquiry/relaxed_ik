@@ -26,7 +26,7 @@ class RelaxedIK_multithread(object):
         self.relaxedIK_subchains = []
         self.mt_manager = Multithread_Manager(subchain_indices, relaxedIK_full)
 
-        for i in xrange(self.num_subchains):
+        for i in range(self.num_subchains):
             mt_vars = RelaxedIK_mt_vars(relaxedIK_full, self.mt_manager, i)  ######################### if there were going to be different variants of solver per subchain, this is where it would be added!!!!!!  (e.g., spearate objectives for camera)
             relaxedIK_subchain = RelaxedIK_subchain(mt_vars, optimization_package=optimization_package, solver_name=solver_name)
             self.relaxedIK_subchains.append(relaxedIK_subchain)
@@ -78,7 +78,7 @@ class RelaxedIK_multithread(object):
             for i, p in enumerate(goal_positions):
                 pos_goals.append(np.array(p))
 
-        # print r.vars.goal_positions
+        # print(r.vars.goal_positions)
         for r in self.relaxedIK_subchains:
             r.vars.goal_positions = pos_goals
             r.vars.goal_quats = quat_goals

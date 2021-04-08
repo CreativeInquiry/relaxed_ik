@@ -8,7 +8,7 @@ from ..Utils.joint_utils import *
 # try:
 #     from boost import objectives_ext
 # except:
-#     print 'ERROR when importing boost library extension.  Defaulting to python implementation (which will be slower).  ' \
+#     print('ERROR when importing boost library extension.  Defaulting to python implementation (which will be slower).  ' \
 #           'To get speed boost, please install and configure the boost python library: ' \
 #           'https://www.boost.org/doc/libs/1_67_0/more/getting_started/unix-variants.html'
 
@@ -101,7 +101,7 @@ class Orientation_Obj(Objective):
         disp = np.linalg.norm(Tf.quaternion_disp(goal_quat,ee_quat), ord=norm_ord)
         disp2 = np.linalg.norm(Tf.quaternion_disp(goal_quat,ee_quat2),ord=norm_ord)
         # after = time.time()
-        # print after - start
+        # print(after - start
 
         x_val = min(disp, disp2)
         # x_val = np.min(np.array([disp,disp2]))
@@ -334,7 +334,7 @@ class Joint_Limit_Obj(Objective):
         penalty = 50.0
         d = 8
         joint_limits = vars.robot.bounds
-        for i in xrange(vars.robot.numDOF):
+        for i in range(vars.robot.numDOF):
             l = joint_limits[i][0]
             u = joint_limits[i][1]
             mid = (u + l) / 2.0

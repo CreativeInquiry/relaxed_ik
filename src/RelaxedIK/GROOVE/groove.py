@@ -1,4 +1,4 @@
-from GROOVE_Utils.groove_type import GrooveType_scipy, GrooveType_nlopt
+from ..GROOVE.GROOVE_Utils.groove_type import GrooveType_scipy, GrooveType_nlopt
 
 def get_groove(vars, optimization_package='scipy', solver_name='slsqp'):
     '''
